@@ -1,14 +1,51 @@
 import { Metadata } from 'next';
+import localFont from 'next/font/local';
 import * as React from 'react';
 
 import '@/styles/globals.css';
-// !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
-import '@/styles/colors.css';
 
 import { siteConfig } from '@/constant/config';
+import { useWindowSize } from 'react-use';
+import ClientLayout from '@/components/client-layout';
 
-// !STARTERCONF Change these default meta
-// !STARTERCONF Look at @/constant/config to change them
+//👇 Configure our local font object
+const sukhumvitFont = localFont({
+  src: [
+    {
+      path: '../fonts/SukhumvitSet-Bold.ttf',
+      weight: '800',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/SukhumvitSet-SemiBold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/SukhumvitSet-Medium.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/SukhumvitSet-Text.ttf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/SukhumvitSet-Thin.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/SukhumvitSet-Light.ttf',
+      weight: '300',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-sukhumvit',
+  preload: true,
+});
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.title,
@@ -40,12 +77,6 @@ export const metadata: Metadata = {
     images: [`${siteConfig.url}/images/og.jpg`],
     // creator: '@th_clarence',
   },
-  // authors: [
-  //   {
-  //     name: 'Theodorus Clarence',
-  //     url: 'https://theodorusclarence.com',
-  //   },
-  // ],
 };
 
 export default function RootLayout({
@@ -54,8 +85,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
-      <body>{children}</body>
+    <html
+      lang='th'
+      className={`${sukhumvitFont.variable} font-sukhumvit font-bold`}
+    >
+      <body>
+        <ClientLayout>{children}</ClientLayout>
+      </body>
     </html>
   );
 }

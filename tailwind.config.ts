@@ -5,10 +5,30 @@ export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      screens: {
+        desktop: '450px',
+      },
       fontFamily: {
+        sukhumvit: ['var(--font-sukhumvit)'],
         primary: ['Inter', ...defaultTheme.fontFamily.sans],
       },
+      boxShadow: {
+        'card-backdrop': 'shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]',
+      },
+      maxWidth: {
+        'mobile-screen': '375px',
+      },
+      width: {
+        'mobile-screen': '375px',
+      },
+      height: {
+        'mobile-screen': '667px',
+      },
       colors: {
+        button: {
+          DEFAULT: '#36698D',
+          active: '#749BB1',
+        },
         primary: {
           // Customize it on globals.css :root
           50: 'rgb(var(--tw-color-primary-50) / <alpha-value>)',
