@@ -1,6 +1,6 @@
-import MainQuestionGenericPage from '@/app/question/components/MainQuestionGenericPage';
-import QuestionCard from '@/components/questionCard/QuestionCard';
 import React, { FC } from 'react';
+
+import MainQuestionGenericPage from '@/app/question/components/MainQuestionGenericPage';
 
 type Props = {
   params: { question: string };

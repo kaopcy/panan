@@ -1,16 +1,20 @@
 'use client';
 
-import React, { FC, useEffect } from 'react';
-
-import { Question, QuestionType } from '@/types/common.type';
-import { questionsPool } from '@/configs/questions';
-import useQuestionStore from '@/store/useQuestionStore';
-import { useEffectOnce } from 'react-use';
 import { redirect } from 'next/navigation';
-import AnswerButton from '@/app/question/components/AnswerButton';
 import { useRouter } from 'next/navigation';
-import QuestionCard from '@/components/questionCard/QuestionCard';
+import React, { FC, useEffect } from 'react';
+import { useEffectOnce } from 'react-use';
+
 import { cn } from '@/lib/utils';
+
+import QuestionCard from '@/components/questionCard/QuestionCard';
+
+import useQuestionStore from '@/store/useQuestionStore';
+
+import AnswerButton from '@/app/question/components/AnswerButton';
+import { questionsPool } from '@/configs/questions';
+
+import { QuestionType } from '@/types/common.type';
 
 type Props = {
   questionType: QuestionType;

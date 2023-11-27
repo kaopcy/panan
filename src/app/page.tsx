@@ -3,10 +3,7 @@
 import Head from 'next/head';
 import * as React from 'react';
 
-import ArrowLink from '@/components/links/ArrowLink';
-import ButtonLink from '@/components/links/ButtonLink';
-import UnderlineLink from '@/components/links/UnderlineLink';
-import UnstyledLink from '@/components/links/UnstyledLink';
+import AnswerLink from '@/app/question/components/AnswerLink';
 
 /**
  * SVGR Support
@@ -18,7 +15,6 @@ import UnstyledLink from '@/components/links/UnstyledLink';
 import Logo from '~/svg/Background.svg';
 import Card from '~/svg/Card.svg';
 import Curve from '~/svg/Curve.svg';
-import AnswerLink from '@/app/question/components/AnswerLink';
 
 // !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
 // Before you begin editing, follow all comments with `STARTERCONF`,

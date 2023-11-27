@@ -1,7 +1,8 @@
-import AnswerButton from '@/app/question/components/AnswerButton';
-import AnswerLink from '@/app/question/components/AnswerLink';
-import QuestionCard from '@/components/questionCard/QuestionCard';
 import React, { FC } from 'react';
+
+import QuestionCard from '@/components/questionCard/QuestionCard';
+
+import AnswerLink from '@/app/question/components/AnswerLink';
 
 const QuestionTypeSelectorPage: FC = () => {
   return (

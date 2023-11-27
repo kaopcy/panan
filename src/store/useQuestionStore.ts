@@ -1,5 +1,6 @@
-import { Answer, QuestionType } from '@/types/common.type';
 import { create } from 'zustand';
+
+import { Answer, QuestionType } from '@/types/common.type';
 
 type Store = {
   answers: Answer[];

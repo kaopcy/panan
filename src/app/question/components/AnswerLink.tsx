@@ -1,6 +1,7 @@
-import { cn } from '@/lib/utils';
 import Link, { LinkProps } from 'next/link';
 import React, { FC } from 'react';
+
+import { cn } from '@/lib/utils';
 
 type ButtonProps = {
   className?: string;

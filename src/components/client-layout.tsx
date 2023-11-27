@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useCallback, useEffect, useState } from 'react';
-import { useEffectOnce, useFirstMountState } from 'react-use';
+import { useEffectOnce } from 'react-use';
 // import { useWindowSize } from 'react-use';
 
 type Props = {
@@ -32,17 +32,17 @@ const ClientLayout: React.FC<Props> = ({ children }) => {
 const MobileComponent: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const topMobile = () => (
-    <div className='flex h-[22px]  w-full shrink-0 items-center justify-center'>
-      <div className='h-full w-[80px]  shrink-0 bg-black'>
-        <div className='h-full w-full rounded-tr-[3px] bg-white'></div>
-      </div>
-      <div className='h-full w-full overflow-clip rounded-b-[14px] bg-black'></div>
-      <div className='h-full w-[80px] shrink-0 bg-black'>
-        <div className='h-full w-full rounded-tl-[3px] bg-white'></div>
-      </div>
-    </div>
-  );
+  // const topMobile = () => (
+  //   <div className='flex h-[22px]  w-full shrink-0 items-center justify-center'>
+  //     <div className='h-full w-[80px]  shrink-0 bg-black'>
+  //       <div className='h-full w-full rounded-tr-[3px] bg-white'></div>
+  //     </div>
+  //     <div className='h-full w-full overflow-clip rounded-b-[14px] bg-black'></div>
+  //     <div className='h-full w-[80px] shrink-0 bg-black'>
+  //       <div className='h-full w-full rounded-tl-[3px] bg-white'></div>
+  //     </div>
+  //   </div>
+  // );
 
   return (
     <div className='max-w-mobile-screen h-mobile-screen relative  w-full rounded-[40px] bg-black p-4 shadow-2xl'>
@@ -100,6 +100,7 @@ const useMediaQuery = (width: number) => {
 
     return () => media.removeListener(updateTarget);
   }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   return targetReached;
 };
