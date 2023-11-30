@@ -9,3 +9,13 @@ export type Answer = {
   id: string;
   answer: boolean;
 };
+
+export type Score = {
+  score: number;
+  questionType: string;
+  question: {
+    questionId: string;
+    questionName: string;
+    answer: boolean;
+  }[];
+};

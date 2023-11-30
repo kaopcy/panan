@@ -18,7 +18,9 @@ const ClientLayout: React.FC<Props> = ({ children }) => {
 
   return isLoaded ? (
     isBreakpoint ? (
-      <div className='h-screen w-full overflow-hidden'>{children}</div>
+      <div className='h-screen w-full overflow-y-auto overflow-x-hidden '>
+        {children}
+      </div>
     ) : (
       <div className=''>
         <BlackScreen>
@@ -52,9 +54,11 @@ const MobileComponent: React.FC<{ children: React.ReactNode }> = ({
       <div className='absolute left-full top-[22%]  h-[9%] w-[6px] rounded-r-md bg-gray-700'></div>
       <div className='relative flex h-full w-full  flex-col overflow-hidden  rounded-[30px] bg-white '>
         {/* {topMobile()} */}
-        <div className='h-full  w-full overflow-hidden'>{children}</div>
+        <div className='h-full  w-full overflow-y-auto overflow-x-hidden'>
+          {children}
+        </div>
 
-        <div className='absolute bottom-2 left-1/2 h-[5px] w-[120px] -translate-x-1/2 rounded-full bg-gray-800  '></div>
+        <div className='absolute bottom-2 left-1/2 z-50 h-[5px] w-[120px] -translate-x-1/2 rounded-full bg-gray-800  '></div>
       </div>
     </div>
   );

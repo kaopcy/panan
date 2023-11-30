@@ -16,10 +16,10 @@ export default {
         'card-backdrop': 'shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]',
       },
       maxWidth: {
-        'mobile-screen': '375px',
+        'mobile-screen': '415px',
       },
       width: {
-        'mobile-screen': '375px',
+        'mobile-screen': '415px',
       },
       height: {
         'mobile-screen': '667px',
