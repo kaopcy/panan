@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useAnimation, useAnimationControls } from 'framer-motion';
+import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { redirect } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import React, { FC, useEffect, useMemo, useState } from 'react';
@@ -9,6 +9,7 @@ import { useEffectOnce, useUnmount } from 'react-use';
 import { cn } from '@/lib/utils';
 
 import QuestionCard from '@/components/questionCard/QuestionCard';
+import Spinner from '@/components/Spinner';
 
 import useQuestionStore from '@/store/useQuestionStore';
 
@@ -18,7 +19,6 @@ import SendResultButton from '@/app/question/components/SendResultButton';
 import { questionsPool } from '@/configs/questions';
 
 import { QuestionType } from '@/types/common.type';
-import Spinner from '@/components/Spinner';
 
 type Props = {
   questionType: QuestionType;
@@ -47,9 +47,9 @@ const MainQuestionGenericPage: FC<Props> = ({ questionType, questionId }) => {
     }
   });
 
-  useUnmount(() => {
-    setPrevQuestionId(questionId);
-  });
+  // useUnmount(() => {
+
+  // });
 
   const nextQuestion =
     pool.question[pool.question.findIndex((e) => e.id == questionId) + 1];
@@ -73,6 +73,7 @@ const MainQuestionGenericPage: FC<Props> = ({ questionType, questionId }) => {
   type ClickState = 'none' | 'answered' | 'back';
 
   const [clickState, setClickState] = useState<ClickState>('none');
+  const [isWaitAnimation, setIsWaitAnimation] = useState<boolean>(true);
 
   const onYesClick = () => {
     updateAnswer(questionId, true);
@@ -91,12 +92,18 @@ const MainQuestionGenericPage: FC<Props> = ({ questionType, questionId }) => {
 
   const onAnimationComplete = () => {
     switch (clickState) {
+      case 'none':
+        setIsWaitAnimation(false);
+        break;
       case 'answered':
-        if (!isEndOfQuestion)
+        if (!isEndOfQuestion) {
           router.push(`${pool.redirectLink}/${nextQuestion.id}`);
+          setPrevQuestionId(questionId);
+        }
         break;
       case 'back':
         router.back();
+        setPrevQuestionId(questionId);
         break;
     }
   };
@@ -131,23 +138,33 @@ const MainQuestionGenericPage: FC<Props> = ({ questionType, questionId }) => {
 
         <QuestionCard>
           {questionCount()}
-          <motion.div
-            initial={
-              parseInt(currentQuestion.id) < parseInt(previousQuestionId ?? '0')
-                ? onTheLeft
-                : onTheRight
-            }
-            animate={animate}
-            onAnimationComplete={onAnimationComplete}
-            transition={transition}
-            className='flex h-full w-full flex-col items-center justify-center px-5 text-center text-[24px] text-black'
-          >
-            <div className='text-lg'>{currentQuestion.question}</div>
-          </motion.div>
+          <AnimatePresence mode='wait'>
+            <motion.div
+              initial={(() => {
+                console.log(
+                  'page: ',
+                  questionId,
+                  parseInt(currentQuestion.id),
+                  parseInt(previousQuestionId ?? '0')
+                );
+                return parseInt(currentQuestion.id) <=
+                  parseInt(previousQuestionId ?? '0')
+                  ? onTheLeft
+                  : onTheRight;
+              })()}
+              animate={animate}
+              onAnimationComplete={onAnimationComplete}
+              transition={transition}
+              className='flex h-full w-full flex-col items-center justify-center px-5 text-center text-[24px] text-black'
+            >
+              <div className='text-lg'>{currentQuestion.question}</div>
+            </motion.div>
+          </AnimatePresence>
         </QuestionCard>
 
         <div className='z-10 mt-[12%] w-full space-y-4 px-11'>
           <AnswerButton
+            disabled={isWaitAnimation}
             active={currentAnswer ? currentAnswer.answer : false}
             onClick={onYesClick}
           >
@@ -161,6 +178,7 @@ const MainQuestionGenericPage: FC<Props> = ({ questionType, questionId }) => {
           </AnswerButton>
           <AnswerButton
             active={currentAnswer ? !currentAnswer.answer : false}
+            disabled={isWaitAnimation}
             onClick={onNoClick}
           >
             <div
@@ -175,7 +193,7 @@ const MainQuestionGenericPage: FC<Props> = ({ questionType, questionId }) => {
           </AnswerButton>
 
           <div className='z-10 flex w-full items-center justify-between'>
-            <BackButton onClick={onBackClick} />
+            <BackButton disabled={isWaitAnimation} onClick={onBackClick} />
             {isEndOfQuestion && (
               <SendResultButton
                 addtionalOnclick={() => {

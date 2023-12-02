@@ -15,7 +15,7 @@ type Store = {
 
 const useQuestionStore = create<Store>()((set, get) => ({
   initQuestion: (questionType: QuestionType) => {
-    set({ questionType: questionType, answers: [] });
+    set({ questionType: questionType, answers: [], previousQuestionId: null });
   },
   answers: [],
   getScore: () => {
